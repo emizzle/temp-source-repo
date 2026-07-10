@@ -6,7 +6,7 @@
   ],
   "generate": [
     {
-      "sourcePath": "library/library.h",
+      "sourcePath": "library/libstorage.h",
       "targetPath": "node/reference/c-api.md",
       "lang": "c"
     }
