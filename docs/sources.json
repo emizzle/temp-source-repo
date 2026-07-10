@@ -1,0 +1,14 @@
+{
+  "mirror": [
+    {
+      "docker/README.md": "node/guides/docker/running-logos-storage-with-docker.md"
+    }
+  ],
+  "generate": [
+    {
+      "sourcePath": "library/library.h",
+      "targetPath": "node/reference/c-api.md",
+      "lang": "c"
+    }
+  ]
+}
