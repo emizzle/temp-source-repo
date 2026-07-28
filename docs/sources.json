@@ -1,14 +1,14 @@
-{
-  "generate": [
-    {
-      "sourcePath": "library/libstorage.h",
-      "targetPath": "node/reference/c-api.md",
-      "type": "c"
-    },
-    {
-      "sourcePath": "src/storage_module_plugin.h",
-      "targetPath": "module/reference/module-api.md",
-      "type": "cpp"
-    }
-  ]
-}
+[
+  {
+    "sourcePath": "library/libstorage.h",
+    "targetInstanceId": "storage_node",
+    "targetPath": "node/reference/c-api.md",
+    "type": "c"
+  },
+  {
+    "sourcePath": "src/storage_module_plugin.h",
+    "targetInstanceId": "storage_module",
+    "targetPath": "module/reference/module-api.md",
+    "type": "cpp"
+  }
+]
