@@ -2,13 +2,13 @@
   {
     "sourcePath": "library/libstorage.h",
     "targetInstanceId": "storage_node",
-    "targetPath": "node/reference/c-api.md",
+    "targetPath": "reference/c-api.md",
     "type": "c"
   },
   {
     "sourcePath": "src/storage_module_plugin.h",
     "targetInstanceId": "storage_module",
-    "targetPath": "module/reference/module-api.md",
+    "targetPath": "reference/module-api.md",
     "type": "cpp"
   }
 ]
