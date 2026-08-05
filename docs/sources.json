@@ -1,19 +1,19 @@
 [
   {
     "sourcePath": "library/libstorage.h",
-    "targetInstanceId": "storage_node",
+    "targetPluginId": "storage_node",
     "targetPath": "reference/c-api.md",
     "type": "c"
   },
   {
     "sourcePath": "src/storage_module_plugin.h",
-    "targetInstanceId": "storage_module",
+    "targetPluginId": "storage_module",
     "targetPath": "reference/module-api.md",
     "type": "cpp"
   },
   {
     "sourcePath": "openapi.yaml",
-    "targetInstanceId": "storage_node",
+    "targetPluginId": "storage_api",
     "targetPath": "openapi.yaml",
     "type": "openapi"
   }
