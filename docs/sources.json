@@ -10,5 +10,11 @@
     "targetInstanceId": "storage_module",
     "targetPath": "reference/module-api.md",
     "type": "cpp"
+  },
+  {
+    "sourcePath": "openapi.yaml",
+    "targetInstanceId": "storage_node",
+    "targetPath": "openapi.yaml",
+    "type": "openapi"
   }
 ]
