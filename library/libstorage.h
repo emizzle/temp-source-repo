@@ -1,5 +1,6 @@
 /**
  * @file libstorage.h
+ * @ingroup libstorage
  * @brief C-exported interface for the Storage shared library.
  *
  * This file implements the public C API for libstorage. It acts as the bridge
@@ -23,6 +24,13 @@
  *
  * `userData` is a pointer provided by the caller that is passed back to the callback
  * for context.
+ */
+
+/**
+ * @defgroup libstorage libstorage C API
+ * @brief Public C API for the Storage shared library.
+ *
+ * Required for the doxygen > moxygen generation pipeline to render correctly.
  */
 
 #ifndef __libstorage__

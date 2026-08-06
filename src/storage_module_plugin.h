@@ -1,5 +1,18 @@
 #pragma once
 
+/**
+ * @file storage_module_plugin.h
+ * @ingroup storage_module
+ * @brief C++ plugin interface for the Logos Storage module.
+ */
+
+/**
+ * @defgroup storage_module Storage Module API
+ * @brief C++ plugin interface for the Logos Storage module.
+ *
+ * Required for the doxygen > moxygen generation pipeline to render correctly.
+ */
+
 #include <atomic>
 #include <condition_variable>
 #include <cstdint>
