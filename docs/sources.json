@@ -7,14 +7,13 @@
   },
   {
     "sourcePath": "src/storage_module_plugin.h",
-    "targetPluginId": "storage_module",
+    "targetPluginId": "storage_learn",
     "targetPath": "reference/module-api.md",
     "type": "cpp"
   },
   {
     "sourcePath": "openapi.yaml",
     "targetPluginId": "storage_api",
-    "targetPath": "openapi.yaml",
     "type": "openapi"
   }
 ]
