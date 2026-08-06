@@ -2,13 +2,17 @@
   {
     "sourcePath": "library/libstorage.h",
     "targetPluginId": "storage_node",
-    "targetPath": "reference/c-api.md",
+    "targetPath": "reference/libstorage-api.md",
     "type": "c"
   },
   {
     "sourcePath": "src/storage_module_plugin.h",
     "targetPluginId": "storage_learn",
-    "targetPath": "reference/module-api.md",
+    "targetPath": "reference/storage-module-api.md",
+    "targetFrontMatter": {
+      "title": "Logos Storage API Reference",
+      "sidebar_label": "API Reference"
+    },
     "type": "cpp"
   },
   {

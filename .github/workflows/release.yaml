@@ -78,11 +78,11 @@ jobs:
               "branch": "$BRANCH",
               "versions": [
                 {
-                  "targetInstanceId": "storage_node",
+                  "targetPluginId": "storage_node",
                   "version", "$VERSION",
                 },
                 {
-                  "targetInstanceId": "storage_module",
+                  "targetPluginId": "storage_learn",
                   "version", "$VERSION",
                 }
               ]
