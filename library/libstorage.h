@@ -40,7 +40,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// The possible returned values for the functions that return int.
+/**
+ * @name Return codes
+ *
+ * The possible returned values for the functions that return int.
+ * @{
+ */
 
 /**
  * The call succeeded: the job has been dispatched to the worker thread
@@ -63,6 +68,7 @@
  * or `RET_ERR` invocation follows upon completion.
  */
 #define RET_PROGRESS 3
+/** @} */
 
 #ifdef __cplusplus
 extern "C"
