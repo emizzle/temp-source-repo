@@ -32,8 +32,9 @@ extern "C" {
  *
  * Wraps a libstorage node and exposes upload, download, and data-management
  * operations. Synchronous methods return immediately; asynchronous methods
- * report completion through the typed events in the
- * `Asynchronous-completion events` section.
+ * report completion through the `storage*` events declared at the end of the
+ * class, each of which delivers a single JSON-encoded string `payload`
+ * documented with the event itself.
  */
 class StorageModuleImpl : public LogosModuleContext {
 public:
@@ -443,13 +444,12 @@ public:
      */
     void importFiles(const std::string& path);
 
-    /**
-     * @name Asynchronous-completion events
-     *
-     * Each event delivers a single JSON-encoded string `payload`, described
-     * with the event below.
-     * @{
-     */
+    // Asynchronous-completion events. Each event delivers a single
+    // JSON-encoded string `payload`, described with the event below.
+    //
+    // Deliberately a plain `//` comment, not a doxygen `@name` group: moxygen
+    // drops user-defined member groups, which removes every event below from
+    // the generated reference page.
 logos_events:
     /**
      * Emitted when start() has finished starting the node.
@@ -566,7 +566,6 @@ logos_events:
      * @endcode
      */
     void storageRemoveDone(const std::string& payload);
-    /** @} */
 
 private:
     void* storageCtx;
