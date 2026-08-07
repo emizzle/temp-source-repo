@@ -9,16 +9,16 @@
  * Unless it is explicitly stated otherwise, all functions are asynchronous and execute
  * their work on a separate thread, returning results via the provided callback. The
  * result code of the function represents the synchronous status of the call itself:
- * returning `RET_OK` if the job has been dispatched to the thread, and `RET_ERR` in case
+ * returning `%RET_OK` if the job has been dispatched to the thread, and `%RET_ERR` in case
  * of immediate failure.
  *
  * The callback function is invoked with the result of the operation, including
- * any data or error messages. If the call was successful, `callerRet` will be `RET_OK`,
- * and `msg` will contain the result data. If there was an error, `callerRet` will be `RET_ERR`,
+ * any data or error messages. If the call was successful, `callerRet` will be `%RET_OK`,
+ * and `msg` will contain the result data. If there was an error, `callerRet` will be `%RET_ERR`,
  * and `msg` will contain the error message.
  *
  * When a function supports progress updates, it may invoke the callback multiple times:
- * first with `RET_PROGRESS` and progress information, and finally with `RET_OK` or `RET_ERR`
+ * first with `%RET_PROGRESS` and progress information, and finally with `%RET_OK` or `%RET_ERR`
  * upon completion. The `msg` parameter will contain a chunk of data for upload and
  * download operations.
  *
@@ -26,11 +26,15 @@
  * for context.
  */
 
+// The @defgroup below is required for the doxygen > moxygen generation
+// pipeline to render correctly. Keep that note out here: the group's detailed
+// description is published to the docs site, this is for maintainers.
 /**
  * @defgroup libstorage libstorage C API
  * @brief Public C API for the Storage shared library.
  *
- * Required for the doxygen > moxygen generation pipeline to render correctly.
+ * Functions that return `int` return one of the values in the Macros section
+ * below: `%RET_OK`, `%RET_ERR`, `%RET_MISSING_CALLBACK` or `%RET_PROGRESS`.
  */
 
 #ifndef __libstorage__
@@ -40,11 +44,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// The possible returned values for the functions that return int.
-//
-// Deliberately a plain `//` comment, not a doxygen `@name` group: moxygen
-// drops user-defined member groups, which removes these macros from the
-// generated reference page entirely.
+// The possible returned values for the functions that return int. This text is
+// carried by the @defgroup description above, because moxygen reads only a
+// section's `kind` and discards its header and description — so a doxygen
+// `@name` group here would render nothing and, worse, drop the macros entirely.
 
 /**
  * The call succeeded: the job has been dispatched to the worker thread
@@ -63,8 +66,8 @@
 #define RET_MISSING_CALLBACK 2
 
 /**
- * The callback is being invoked with a progress update; a final `RET_OK`
- * or `RET_ERR` invocation follows upon completion.
+ * The callback is being invoked with a progress update; a final `%RET_OK`
+ * or `%RET_ERR` invocation follows upon completion.
  */
 #define RET_PROGRESS 3
 
@@ -76,8 +79,8 @@ extern "C"
     /**
      * Callback invoked with the result of an operation.
      *
-     * @param callerRet `RET_OK` on success, `RET_ERR` on failure, or
-     *                  `RET_PROGRESS` for an intermediate progress update.
+     * @param callerRet `%RET_OK` on success, `%RET_ERR` on failure, or
+     *                  `%RET_PROGRESS` for an intermediate progress update.
      * @param msg       The result data on success, the error message on
      *                  failure, or a chunk of data for upload and download
      *                  progress updates.
@@ -137,7 +140,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the repo path.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_repo(
         void *ctx,
@@ -172,7 +175,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the debug information JSON.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_debug(
         void *ctx,
@@ -185,7 +188,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the signed peer record.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_spr(
         void *ctx,
@@ -201,7 +204,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the peer ID.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_peer_id(
         void *ctx,
@@ -215,7 +218,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the metrics data.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_get_metrics(
         void *ctx,
@@ -230,7 +233,7 @@ extern "C"
      *                 `ERROR` or `FATAL`.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_log_level(
         void *ctx,
@@ -251,7 +254,7 @@ extern "C"
      * @param peerAddressesSize Number of entries in `peerAddresses`.
      * @param callback          Invoked with the result of the operation.
      * @param userData          Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_connect(
         void *ctx,
@@ -280,7 +283,7 @@ extern "C"
      * @param peerId   The peer ID to request debug information for.
      * @param callback Invoked with the peer debug information JSON.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_peer_debug(
         void *ctx,
@@ -310,7 +313,7 @@ extern "C"
      * @param callback  Invoked with the `sessionId` for the upload session
      *                  created.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_upload_init(
         void *ctx,
@@ -328,7 +331,7 @@ extern "C"
      * @param len       Length of `chunk` in bytes.
      * @param callback  Invoked with the result of the operation.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_upload_chunk(
         void *ctx,
@@ -345,7 +348,7 @@ extern "C"
      * @param sessionId The upload session returned by `storage_upload_init`.
      * @param callback  Invoked with the `cid` of the uploaded content.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_upload_finalize(
         void *ctx,
@@ -360,7 +363,7 @@ extern "C"
      * @param sessionId The upload session returned by `storage_upload_init`.
      * @param callback  Invoked with the result of the operation.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_upload_cancel(
         void *ctx,
@@ -371,7 +374,7 @@ extern "C"
     /**
      * Upload the file defined as `filepath` in the init method.
      *
-     * The callback will be called with `RET_PROGRESS` updates during the
+     * The callback will be called with `%RET_PROGRESS` updates during the
      * upload, if the chunk size is equal or greater than the session
      * `chunkSize`.
      *
@@ -386,7 +389,7 @@ extern "C"
      * @param sessionId The upload session returned by `storage_upload_init`.
      * @param callback  Invoked with the `cid` of the uploaded content.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_upload_file(
         void *ctx,
@@ -409,7 +412,7 @@ extern "C"
      *                 private queries (`"true"` if they were enabled, or
      *                 `"false"` otherwise).
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_toggle_private_queries(
         void *ctx,
@@ -434,7 +437,7 @@ extern "C"
      * @param local     Whether to attempt local store retrieval only.
      * @param callback  Invoked with the result of the operation.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_download_init(
         void *ctx,
@@ -448,7 +451,7 @@ extern "C"
      * Perform a streaming download for `cid`.
      *
      * The init method must have been called prior to this. The callback will
-     * be called with `RET_PROGRESS` updates during the download.
+     * be called with `%RET_PROGRESS` updates during the download.
      *
      * Typical usage:
      * @code{.c}
@@ -465,7 +468,7 @@ extern "C"
      * @param filepath  If provided, the content will be written to that file.
      * @param callback  Invoked with the result of the operation.
      * @param userData  Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_download_stream(
         void *ctx,
@@ -480,13 +483,13 @@ extern "C"
      * Download a chunk for the given `cid`.
      *
      * The init method must have been called prior to this. The chunk will be
-     * returned via the callback using `RET_PROGRESS`.
+     * returned via the callback using `%RET_PROGRESS`.
      *
      * @param ctx      The node context returned by `storage_new`.
      * @param cid      The content identifier to download.
      * @param callback Invoked with the downloaded chunk.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_download_chunk(
         void *ctx,
@@ -501,7 +504,7 @@ extern "C"
      * @param cid      The content identifier of the download to cancel.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_download_cancel(
         void *ctx,
@@ -528,7 +531,7 @@ extern "C"
      * @param cid      The content identifier to retrieve the manifest for.
      * @param callback Invoked with the manifest JSON.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_download_manifest(
         void *ctx,
@@ -542,7 +545,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the list of manifests.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_list(
         void *ctx,
@@ -565,7 +568,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the storage space information JSON.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_space(
         void *ctx,
@@ -579,7 +582,7 @@ extern "C"
      * @param cid      The content identifier of the content to delete.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_delete(
         void *ctx,
@@ -597,7 +600,7 @@ extern "C"
      * @param cid      The content identifier of the content to fetch.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_fetch(
         void *ctx,
@@ -612,7 +615,7 @@ extern "C"
      * @param cid      The content identifier of the content to check.
      * @param callback Invoked with the result of the check.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_exists(
         void *ctx,
@@ -637,7 +640,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_start(void *ctx,
                       StorageCallback callback,
@@ -660,7 +663,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_stop(void *ctx,
                      StorageCallback callback,
@@ -683,7 +686,7 @@ extern "C"
      * @param ctx      The node context returned by `storage_new`.
      * @param callback Invoked with the result of the operation.
      * @param userData Caller-provided pointer passed back to `callback`.
-     * @return `RET_OK` if the job was dispatched, `RET_ERR` on immediate failure.
+     * @return `%RET_OK` if the job was dispatched, `%RET_ERR` on immediate failure.
      */
     int storage_close(void *ctx,
                       StorageCallback callback,
@@ -708,7 +711,7 @@ extern "C"
      * @endcode
      *
      * @param ctx The node context returned by `storage_new`.
-     * @return `RET_OK` on success, `RET_ERR` on failure.
+     * @return `%RET_OK` on success, `%RET_ERR` on failure.
      */
     int storage_destroy(void *ctx);
 

@@ -6,11 +6,12 @@
  * @brief C++ plugin interface for the Logos Storage module.
  */
 
+// The @defgroup below is required for the doxygen > moxygen generation
+// pipeline to render correctly. Keep that note out here: the group's detailed
+// description is published to the docs site, this is for maintainers.
 /**
  * @defgroup storage_module Storage Module API
  * @brief C++ plugin interface for the Logos Storage module.
- *
- * Required for the doxygen > moxygen generation pipeline to render correctly.
  */
 
 #include <atomic>
