@@ -40,12 +40,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-/**
- * @name Return codes
- *
- * The possible returned values for the functions that return int.
- * @{
- */
+// The possible returned values for the functions that return int.
+//
+// Deliberately a plain `//` comment, not a doxygen `@name` group: moxygen
+// drops user-defined member groups, which removes these macros from the
+// generated reference page entirely.
 
 /**
  * The call succeeded: the job has been dispatched to the worker thread
@@ -68,7 +67,6 @@
  * or `RET_ERR` invocation follows upon completion.
  */
 #define RET_PROGRESS 3
-/** @} */
 
 #ifdef __cplusplus
 extern "C"
